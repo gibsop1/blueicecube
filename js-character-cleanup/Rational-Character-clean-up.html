@@ -1,0 +1,63 @@
+<!-- 28 April 2014 - Paul Gibson-->
+<html>
+ <head>
+  <title>
+   Rational Text Cleanup Tool
+  </title>
+
+  <style>
+  body { font-family: Arial; }
+  </style>
+
+ </head>
+
+ <body>
+  Paste your Content in this Box:
+  <br/>
+  <textarea id='inputtext' name='input' rows='20' cols='200'></textarea>
+  <p/>
+  <input id="clickMe" type="button" value="Rationalise it!" />
+
+  <p/>
+
+  Converted Text:
+  <br/>
+  <textarea id='outtext' name='input' rows='20' cols='200' readonly>
+
+   Converted Text.....
+
+  </textarea>
+
+  
+  <script type='text/javascript'>
+   document.getElementById("clickMe").onclick = removeBadChars;
+
+   function removeBadChars() {
+    var text = document.getElementById('inputtext').value;
+    console.log(text);
+
+/*  Add new subsitutions here */
+/*  Start */
+
+	/*  ndash & mdash */
+    	text = text.replace(/\u2013|\u2014/g, '-');
+
+	/*  hash # */
+    	text = text.replace(/#/g, "{hash}");
+
+	/*  £ UK Pound Symbol */
+    	text = text.replace(/\u00A3/g, "{pound}");
+
+	/*  Tabs */
+    	text = text.replace(/\t/g, " ");
+
+	/*  2 or more spaces */
+    	text = text.replace(/ {2,}/g, " ");
+
+/*  End  */
+
+    document.getElementById('outtext').value = text;
+   }
+  </script>
+ </body>
+</html>
